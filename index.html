@@ -361,7 +361,7 @@
     gap: 1.25rem;
   }
 
-  /* ── VEHICLE CARD (Standardized Matrix Height Fixed Flex) ── */
+  /* ── VEHICLE CARD ── */
   .vehicle-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -706,7 +706,7 @@
     color: var(--text-muted);
     margin-bottom: 1.5rem;
   }
-  .form-required-note span { color: var(--gold); }
+  .form-required-note span { color: var(--gold); margin-left: 2px; }
   .form-section-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 1rem;
@@ -1005,7 +1005,7 @@
   .apply-co { display: none; }
   .apply-co.active { display: block; }
 
-  /* ── MODAL OVERLAY FIX ── */
+  /* ── MODAL OVERLAY ── */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -1063,7 +1063,7 @@
     .modal-img-wrap { min-height: 200px; }
   }
 
-  /* toast framework UI */
+  /* Toast Framework */
   .toast {
     position: fixed;
     bottom: 2rem;
@@ -1087,6 +1087,61 @@
     transition: all .4s cubic-bezier(0.34,1.56,0.64,1);
   }
   .toast.show { transform: translateY(0); opacity: 1; }
+  
+  /* Footer styles */
+  footer {
+    background: var(--bg-secondary);
+    padding: 3rem 2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+  }
+  .footer-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  @media(max-width: 968px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media(max-width: 568px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.1rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: inline-block;
+    padding: 0.25rem 0;
+    transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
 </style>
 </head>
 <body>
@@ -1363,7 +1418,7 @@
       </div>
       <div class="contact-details">
         <h3>Dealer Information</h3>
-        <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street,<br>Sandy, UT 84070</span></div>
+        <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street, Sandy, UT 84070</span></div>
         <div class="dealer-info-row"><i class="fas fa-phone"></i><span>385-685-0339</span></div>
       </div>
     </div>
@@ -1446,13 +1501,13 @@
         <h2 id="modalTitle" class="section-title text-xl font-bold uppercase tracking-wide text-white mb-2" style="font-family:'Barlow Condensed', sans-serif;"></h2>
         <div id="modalPrice" class="card-price text-emerald-400 font-bold font-mono text-xl mb-4"></div>
         
-        <div class="border-t border-b border-gray-800 py-3 mb-6 space-y-1 font-mono text-xs text-gray-400">
+        <div style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding: 0.75rem 0; margin-bottom: 1.5rem; font-family: monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">
           <div id="modalSpecs1"></div>
           <div id="modalSpecs2"></div>
         </div>
 
-        <h3 class="text-xs font-bold uppercase text-gray-300 tracking-wider mb-3">Check Availability & Special Offers</h3>
-        <form class="space-y-3 font-mono text-xs uppercase" onsubmit="interceptSubmit(event, 'Lead payload recorded! A build engineer will reach out.')">
+        <h3 style="font-family:'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight:700; uppercase; tracking-wider; margin-bottom:0.75rem; color: var(--text-primary);">Check Availability & Special Offers</h3>
+        <form style="display:flex; flex-direction:column; gap:0.5rem;" onsubmit="interceptSubmit(event, 'Lead payload recorded! A build engineer will reach out.')">
           <input type="text" placeholder="First Name *" required />
           <input type="text" placeholder="Last Name *" required />
           <input type="tel" placeholder="Phone Number *" required />
@@ -1478,7 +1533,7 @@
     </div>
     <div class="footer-col">
       <h4>Get Started</h4>
-      <ul class="space-y-1">
+      <ul>
         <li><a href="#" data-view="home">Home</a></li>
         <li><a href="#" data-view="inventory">Inventory</a></li>
         <li><a href="#" data-view="carfinder">Car Finder</a></li>
@@ -1488,7 +1543,7 @@
       <h4>Store Hours</h4>
       <div class="hour-row"><span>Mon – Fri</span><span>9:00 AM – 6:00 PM</span></div>
       <div class="hour-row"><span>Saturday</span><span>10:00 AM – 5:00 PM</span></div>
-      <div class="hour-row"><span>Sunday</span><span class="text-red-500 font-bold">Closed</span></div>
+      <div class="hour-row"><span>Sunday</span><span style="color: #ef4444; font-weight:700;">Closed</span></div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1499,23 +1554,23 @@
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
 <script>
-// ── THE ABSOLUTE REAL OVERLAND DATASET SOURCE MATRIX ──────────────────────────────────────────────────────────────────
+// ── THE ABSOLUTE REAL OVERLAND DATASET SOURCE MATRIX (PRODUCING DIVERSE SAMPLES) ──────────────────────────────────────
 const VEHICLES = [  
-  { id:1, year:2026, make:'Lexus', model:'GX', trim:'GX 550 OVERTRAIL+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:5, price:109977, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
-  { id:2, year:2026, make:'Lexus', model:'GX', trim:'GX 550 LUXURY+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:8, price:109977, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
-  { id:3, year:2026, make:'Toyota', model:'Tacoma', trim:'TRD SPORT PICKUP 4D 5 FT', body:'Truck', drive:'4WD', color:'Silver', mileage:120, price:39977, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'Hot Deal' },  
-  { id:4, year:2026, make:'Toyota', model:'Land Cruiser', trim:'SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:50, price:124977, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
-  { id:5, year:2025, make:'Toyota', model:'4Runner', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Black', mileage:3200, price:62500, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
-  { id:6, year:2025, make:'Toyota', model:'Tundra', trim:'TRD PRO CREWMAX PICKUP 4D', body:'Truck', drive:'4WD', color:'Gray', mileage:8100, price:73900, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:7, year:2025, make:'Lexus', model:'GX', trim:'GX 550 PREMIUM+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Blue', mileage:1450, price:99500, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:8, year:2025, make:'Toyota', model:'Sequoia', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:2900, price:88500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
-  { id:9, year:2024, make:'Toyota', model:'4Runner', trim:'TRD OFF-ROAD PREMIUM 4D', body:'SUV', drive:'4WD', color:'Green', mileage:14200, price:52000, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:10, year:2024, make:'Toyota', model:'Tacoma', trim:'TRD PRO DOUBLE CAB 4D', body:'Truck', drive:'4WD', color:'Black', mileage:22000, price:47500, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:11, year:2024, make:'Toyota', model:'Land Cruiser', trim:'1958 HERITAGE EDITION 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:6700, price:115000, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'Rare Find' },  
-  { id:12, year:2023, make:'Toyota', model:'Tundra', trim:'CAPSTONE CREWMAX 4D', body:'Truck', drive:'4WD', color:'Silver', mileage:31500, price:66800, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:13, year:2023, make:'Toyota', model:'4Runner', trim:'VENTURE SPECIAL ED 4D', body:'SUV', drive:'4WD', color:'White', mileage:28100, price:49800, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
-  { id:14, year:2022, make:'Toyota', model:'Tacoma', trim:'TRD OFF-ROAD DOUBLE CAB', body:'Truck', drive:'4WD', color:'Blue', mileage:41000, price:38500, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'Best Value' },  
-  { id:15, year:2022, make:'Lexus', model:'GX', trim:'GX 460 PREMIUM SPORT UTILITY', body:'SUV', drive:'4WD', color:'Black', mileage:38000, price:57500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:1, year:2026, make:'Lexus', model:'GX', trim:'GX 550 Overtrail+ Sport Utility 4D', body:'SUV', drive:'4WD', color:'White', mileage:5, price:109977, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
+  { id:2, year:2026, make:'Lexus', model:'GX', trim:'GX 550 Luxury+ Sport Utility 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:8, price:102500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:3, year:2026, make:'Toyota', model:'Tacoma', trim:'TRD Sport Pickup 4D 5 ft', body:'Truck', drive:'4WD', color:'Silver', mileage:120, price:39977, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'Hot Deal' },  
+  { id:4, year:2026, make:'Toyota', model:'Land Cruiser', trim:'First Edition Sport Utility 4D', body:'SUV', drive:'4WD', color:'White', mileage:50, price:124977, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
+  { id:5, year:2025, make:'Toyota', model:'4Runner', trim:'TRD Pro Sport Utility 4D', body:'SUV', drive:'4WD', color:'Black', mileage:3200, price:62500, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:6, year:2025, make:'Toyota', model:'Tundra', trim:'TRD Pro CrewMax Pickup 4D', body:'Truck', drive:'4WD', color:'Gray', mileage:8100, price:73900, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:7, year:2025, make:'Lexus', model:'GX', trim:'GX 550 Premium+ Sport Utility 4D', body:'SUV', drive:'4WD', color:'Blue', mileage:1450, price:99500, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:8, year:2025, make:'Toyota', model:'Sequoia', trim:'TRD Pro Sport Utility 4D', body:'SUV', drive:'4WD', color:'White', mileage:2900, price:88500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:9, year:2024, make:'Toyota', model:'4Runner', trim:'TRD Off-Road Premium 4D', body:'SUV', drive:'4WD', color:'Green', mileage:14200, price:52000, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:10, year:2024, make:'Toyota', model:'Tacoma', trim:'TRD Pro Double Cab 4D', body:'Truck', drive:'4WD', color:'Black', mileage:22000, price:47500, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:11, year:2024, make:'Toyota', model:'Land Cruiser', trim:'1958 Heritage Edition 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:6700, price:115000, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'Rare Find' },  
+  { id:12, year:2023, make:'Toyota', model:'Tundra', trim:'Capstone CrewMax 4D', body:'Truck', drive:'4WD', color:'Silver', mileage:31500, price:66800, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:13, year:2023, make:'Toyota', model:'4Runner', trim:'Venture Special Ed 4D', body:'SUV', drive:'4WD', color:'White', mileage:28100, price:49800, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:14, year:2022, make:'Toyota', model:'Tacoma', trim:'TRD Off-Road Double Cab', body:'Truck', drive:'4WD', color:'Blue', mileage:41000, price:38500, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'Best Value' },  
+  { id:15, year:2022, make:'Lexus', model:'GX', trim:'GX 460 Premium Sport Utility', body:'SUV', drive:'4WD', color:'Black', mileage:38000, price:57500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'' },  
 ];
 
 const REVIEWS = [
@@ -1524,7 +1579,17 @@ const REVIEWS = [
   { title:'Team are incredible', body:"Brandon and his team are incredible. The Tundra they've built for me looks and drives amazing. I'll be back for my next purchase.", name:'Jeff Robinson', stars:5 }
 ];
 
-// ── ROUTER STATE MANAGEMENT ───────────────────────────────────────────────────
+// ── DECLARATIVE CONFIGURATION PATTERN MAP ─────────────────────────────────────────────────────────────────────────────
+const FILTER_MAP = [
+  { elementId: "filterYear",  property: "year",  transform: (val) => parseInt(val) },
+  { elementId: "filterMake",  property: "make",  transform: (val) => val },
+  { elementId: "filterModel", property: "model", transform: (val) => val },
+  { elementId: "filterBody",  property: "body",  transform: (val) => val },
+  { elementId: "filterDrive", property: "drive", transform: (val) => val },
+  { elementId: "filterColor", property: "color", transform: (val) => val }
+];
+
+// ── ROUTER MANAGEMENT ────────────────────────────────────────────────────────────────────────────────────────────────
 function navigate(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + viewId)?.classList.add('active');
@@ -1549,10 +1614,10 @@ document.getElementById('hamburgerBtn').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ── FIXED CARD BUILDER ──
+// ── OPTIMIZED DOM CARD BUILDER (ZERO-DUPLICATE PATTERN) ──────────────────────────────────────────────────────────────
 function buildCard(v) {
   return `
-  <div class="vehicle-card">
+  <div class="vehicle-card" data-id="${v.id}">
     <div class="card-img-wrap">
       <img src="${v.img}" alt="${v.year} ${v.make} ${v.model}" loading="lazy" />
       ${v.badge ? `<div class="card-badge">${v.badge}</div>` : ''}
@@ -1562,7 +1627,7 @@ function buildCard(v) {
       <div>
         <div class="card-make">${v.make}</div>
         <div class="card-model">${v.year} ${v.make} ${v.model}</div>
-        <div class="card-trim">Trim: ${v.trim}</div>
+        <div class="card-trim">${v.trim}</div>
         <div class="card-divider"></div>
         <div class="card-specs">
           <div class="card-spec"><i class="fas fa-road"></i>${v.mileage.toLocaleString()} mi</div>
@@ -1582,7 +1647,7 @@ function buildCard(v) {
   </div>`;
 }
 
-// ── FIXED LEAD CAPTURING OVERLAY MODAL FUNCTION ──
+// ── OVERLAY MODEL HANDLING ───────────────────────────────────────────────────────────────────────────────────────────
 function openDetailsModal(id) {
   const car = VEHICLES.find(v => v.id === id);
   if (!car) return;
@@ -1605,36 +1670,28 @@ document.getElementById('detailModal').addEventListener('click', (e) => {
   if (e.target.id === 'detailModal') closeModal();
 });
 
-// ── DYNAMIC INJECTORS (FORCES PURGE OF RAW HTML) ──
-function renderHomeFeatured() {
-  const featured = VEHICLES.filter(v => v.badge).slice(0, 4);
-  const homeGrid = document.getElementById('homeFeaturedGrid');
-  if (homeGrid) {
-    homeGrid.innerHTML = featured.map(buildCard).join('');
-  }
-}
+// ── COMPOSABLE PIPELINE ENGINE (PREVENTS REPEATED RENDERS) ────────────────────────────────────────────────────────────
+function getFilteredVehicles() {
+  let results = [...VEHICLES]; // Work on a shallow memory clone
 
-function getFiltered() {
-  const year = document.getElementById('filterYear').value;
-  const make = document.getElementById('filterMake').value;
-  const model = document.getElementById('filterModel').value;
-  const body = document.getElementById('filterBody').value;
-  const maxPrice = document.getElementById('filterPrice').value;
-  const drive = document.getElementById('filterDrive').value;
-  const color = document.getElementById('filterColor').value;
-  const sort = document.getElementById('sortSelect').value;
-
-  let results = VEHICLES.filter(v => {
-    if (year && v.year != year) return false;
-    if (make && v.make !== make) return false;
-    if (model && v.model !== model) return false;
-    if (body && v.body !== body) return false;
-    if (maxPrice && v.price > parseInt(maxPrice)) return false;
-    if (drive && v.drive !== drive) return false;
-    if (color && v.color !== color) return false;
-    return true;
+  // 1. Process Equality Parameters from FILTER_MAP
+  FILTER_MAP.forEach(({ elementId, property, transform }) => {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const val = el.value.trim();
+    if (val === "") return; // Skip inactive parameters
+    results = results.filter(v => v[property] === transform(val));
   });
 
+  // 2. Process Max Price Range Boundary
+  const priceEl = document.getElementById('filterPrice');
+  if (priceEl && priceEl.value !== "") {
+    const maxPrice = parseInt(priceEl.value);
+    results = results.filter(v => v.price <= maxPrice);
+  }
+
+  // 3. Process Sorting Algorithms
+  const sort = document.getElementById('sortSelect').value;
   if (sort === 'price-asc') results.sort((a,b) => a.price - b.price);
   else if (sort === 'price-desc') results.sort((a,b) => b.price - a.price);
   else if (sort === 'year-desc') results.sort((a,b) => b.year - a.year);
@@ -1643,51 +1700,49 @@ function getFiltered() {
   return results;
 }
 
-function renderInventory() {
-  const results = getFiltered();
+// ── BATCHED DOM RENDER ENGINE ────────────────────────────────────────────────────────────────────────────────────────
+function renderInventoryGrid() {
+  const data = getFilteredVehicles();
   const grid = document.getElementById('inventoryGrid');
   const count = document.getElementById('resultsCount');
 
   if (count) {
-    count.textContent = `Showing ${results.length} of ${VEHICLES.length} Available Vehicles`;
+    count.textContent = `Showing ${data.length} of ${VEHICLES.length} Available Vehicles`;
   }
 
   if (!grid) return;
+  grid.innerHTML = ""; // Complete purge to eliminate staleness/duplicates
 
-  if (!results.length) {
-    grid.innerHTML = '<div class="no-results"><i class="fas fa-search" style="display:block;font-size:2rem;color:var(--gold);margin-bottom:1rem;"></i>No vehicles match your filters</div>';
+  if (data.length === 0) {
+    grid.innerHTML = '<div class="no-results"><i class="fas fa-search" style="display:block;font-size:2rem;color:var(--gold);margin-bottom:1rem;"></i>No vehicles match your current filters.</div>';
     return;
   }
-  grid.innerHTML = results.map(buildCard).join('');
+
+  // Build inside document fragment to limit paint cycles
+  const fragment = document.createDocumentFragment();
+  data.forEach(v => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = buildCard(v).trim();
+    fragment.appendChild(wrapper.firstChild);
+  });
+  grid.appendChild(fragment);
 }
 
-// Attach listeners safely
-const filterIds = ['filterYear','filterMake','filterModel','filterBody','filterPrice','filterDrive','filterColor','sortSelect'];
-filterIds.forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener('change', renderInventory);
-});
-
-const clearBtn = document.getElementById('clearFilters');
-if (clearBtn) {
-  clearBtn.addEventListener('click', () => {
-    filterIds.forEach(id => { 
-      const el = document.getElementById(id);
-      if (el) el.selectedIndex = 0; 
-    });
-    renderInventory();
-  });
+function renderHomeFeaturedGrid() {
+  const featured = VEHICLES.filter(v => v.badge).slice(0, 4);
+  const homeGrid = document.getElementById('homeFeaturedGrid');
+  const homeCount = document.getElementById('homeVehicleCount');
+  
+  if (homeCount) {
+    homeCount.textContent = `Showing ${VEHICLES.length} of ${VEHICLES.length} Available Vehicles`;
+  }
+  
+  if (homeGrid) {
+    homeGrid.innerHTML = featured.map(buildCard).join('');
+  }
 }
 
-document.querySelectorAll('.filter-label').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.getElementById(btn.dataset.target);
-    const isOpen = btn.classList.toggle('open');
-    if (target) target.style.display = isOpen ? '' : 'none';
-  });
-});
-
-function renderReviews() {
+function renderReviewsList() {
   const col = document.getElementById('reviewsColumn');
   if (col) {
     col.innerHTML = REVIEWS.map(r => `
@@ -1701,6 +1756,34 @@ function renderReviews() {
   }
 }
 
+// ── RUNTIME REGISTRATIONS ────────────────────────────────────────────────────────────────────────────────────────────
+const allFilterElementIds = [...FILTER_MAP.map(f => f.elementId), 'filterPrice', 'sortSelect'];
+
+allFilterElementIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', renderInventoryGrid);
+});
+
+const clearButtonElement = document.getElementById('clearFilters');
+if (clearButtonElement) {
+  clearButtonElement.addEventListener('click', () => {
+    allFilterElementIds.forEach(id => { 
+      const el = document.getElementById(id);
+      if (el) el.selectedIndex = 0; 
+    });
+    renderInventoryGrid();
+  });
+}
+
+document.querySelectorAll('.filter-label').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    const isOpen = btn.classList.toggle('open');
+    if (target) target.style.display = isOpen ? '' : 'none';
+  });
+});
+
+// ── UTILITIES ──
 function interceptSubmit(e, text) {
   e.preventDefault();
   showToast(text);
@@ -1743,11 +1826,11 @@ function showToast(msg) {
   }
 }
 
-// ── LIFECYCLE INITIALIZATION (FORCED RUN) ──
+// ── RUNTIME LIFECYCLE SYNC ───────────────────────────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  renderHomeFeatured();
-  renderInventory();
-  renderReviews();
+  renderHomeFeaturedGrid();
+  renderInventoryGrid();
+  renderReviewsList();
 });
 </script>
 </body>
