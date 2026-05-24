@@ -108,7 +108,7 @@
   }
   .logo-text {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.7 0.7rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -361,7 +361,7 @@
     gap: 1.25rem;
   }
 
-  /* ── VEHICLE CARD (Standardized Matrix Height) ── */
+  /* ── VEHICLE CARD (Standardized Matrix Height Fixed Flex) ── */
   .vehicle-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -445,11 +445,6 @@
     color: var(--text-primary);
     line-height: 1.2;
     margin-bottom: 0.35rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 2.4em;
   }
   .card-trim {
     font-size: 0.78rem;
@@ -1010,7 +1005,7 @@
   .apply-co { display: none; }
   .apply-co.active { display: block; }
 
-  /* ── MODAL OVERLAY (View Details System Extension) ── */
+  /* ── MODAL OVERLAY FIX ── */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -1066,100 +1061,6 @@
   @media(max-width: 768px) {
     .modal-grid { grid-template-columns: 1fr; }
     .modal-img-wrap { min-height: 200px; }
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
-    padding: 3rem 2rem 1.5rem;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 2.5rem;
-    max-width: 1200px;
-    margin: 0 auto 2.5rem;
-  }
-  .footer-brand p {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-top: 0.75rem;
-  }
-  .footer-col h4 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 0.5rem; }
-  .footer-col ul li a {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    transition: color .2s;
-  }
-  .footer-col ul li a:hover { color: var(--text-primary); }
-  .footer-col .hour-row { color: var(--text-muted); font-size: 0.82rem; }
-  .social-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-  .social-link {
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    transition: border-color .2s, color .2s;
-  }
-  .social-link:hover { border-color: var(--gold); color: var(--gold); }
-  .footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  /* ── MOBILE RESPONSIVENESS MATRIX ── */
-  @media (max-width: 900px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .reviews-layout { grid-template-columns: 1fr; }
-    .about-layout { grid-template-columns: 1fr; }
-    .contact-layout { grid-template-columns: 1fr; }
-    .dealer-card { position: static; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-grid-3 { grid-template-columns: 1fr 1fr; }
-    .inventory-layout { grid-template-columns: 1fr; }
-    .sidebar { position: static; }
-    .hero-stats { gap: 1.5rem; }
-  }
-  @media (max-width: 680px) {
-    .topbar { font-size: 0.68rem; gap: 0.75rem; padding: 0.4rem 1rem; }
-    nav { padding: 0 1rem; }
-    .nav-links, .nav-apply { display: none; }
-    .hamburger { display: flex; }
-    .hero-content { padding: 0 1.5rem; }
-    .hero-title { font-size: 3rem; }
-    .hero-stats { flex-wrap: wrap; gap: 1rem; }
-    .inventory-layout { padding: 0 1rem 3rem; }
-    .featured-grid, .reviews-layout, .about-layout, .contact-layout { padding-left: 1rem; padding-right: 1rem; }
-    .form-container { padding-left: 1rem; padding-right: 1rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .form-grid-3 { grid-template-columns: 1fr; }
-    .welcome-section, .page-banner { padding: 1.25rem 1rem; }
   }
 
   /* toast framework UI */
@@ -1399,9 +1300,6 @@
         <div class="form-field"><label>Phone Number <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
         <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
       </div>
-      <div class="form-grid full" style="margin-top:1rem;">
-        <div class="form-field"><label>Comments</label><textarea placeholder="Anything else you'd like us to know..."></textarea></div>
-      </div>
       <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Request</button>
     </form>
   </div>
@@ -1440,14 +1338,12 @@
       <div class="about-body">
         <p>With years of experience serving the area, our dealership is dedicated to offering high-quality, pre-owned vehicles to our customers.</p>
         <p>From the moment you walk through our door, we're committed to providing you with a great car-buying experience. With our skilled sales staff and financing options, we'll help you get the vehicle you want, at the great price you deserve.</p>
-        <p>Our goal is for you to be so delighted with your purchase that you'll come see us when you need your next car and will happily recommend us to friends and family. Customer referrals are the ultimate compliment.</p>
       </div>
     </div>
     <div>
       <div class="dealer-card">
         <h3>Dealership Information</h3>
         <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street,<br>Sandy, UT 84070</span></div>
-        <div class="dealer-info-row"><i class="fas fa-phone"></i><span>385-685-0339</span></div>
         <button class="submit-btn" style="margin-top:1.5rem;width:100%;font-size:0.75rem;" data-view="contact">Contact Us</button>
       </div>
     </div>
@@ -1505,7 +1401,6 @@
           <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" required /></div>
           <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
           <div class="form-field"><label>Cell Phone <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
-          <div class="form-field"><label>Home Phone (Optional)</label><input type="tel" placeholder="(555) 000-0000" /></div>
           <div class="form-field"><label>Date of Birth <span class="req">*</span></label><input type="date" required /></div>
           <div class="form-field"><label>SSN <span class="req">*</span></label><input type="text" placeholder="___-__-____" maxlength="11" required /></div>
         </div>
@@ -1516,7 +1411,7 @@
         <div class="form-grid-3">
           <div class="form-field"><label>City <span class="req">*</span></label><input type="text" placeholder="City" required /></div>
           <div class="form-field"><label>State <span class="req">*</span></label>
-            <select required><option value="">State</option><option>UT</option><option>CA</option><option>NV</option><option>CO</option></select>
+            <select required><option value="">State</option><option>UT</option><option>CA</option></select>
           </div>
           <div class="form-field"><label>Zip Code <span class="req">*</span></label><input type="text" placeholder="Zip Code" maxlength="5" required /></div>
         </div>
@@ -1604,7 +1499,7 @@
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
 <script>
-// ── REALISTIC EXPEDITION/OVERLAND DATASET MATRIX ──────────────────────────────────────────────────────────────────────
+// ── THE ABSOLUTE REAL OVERLAND DATASET SOURCE MATRIX ──────────────────────────────────────────────────────────────────
 const VEHICLES = [  
   { id:1, year:2026, make:'Lexus', model:'GX', trim:'GX 550 OVERTRAIL+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:5, price:109977, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
   { id:2, year:2026, make:'Lexus', model:'GX', trim:'GX 550 LUXURY+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:8, price:109977, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
@@ -1626,8 +1521,7 @@ const VEHICLES = [
 const REVIEWS = [
   { title:'Best way to get something', body:'Best way to get something to rip up the mountains!!!!', name:'Ryan Guptill', stars:5 },
   { title:'Customer service is outstanding', body:'Brandon and his team at Alpine Overland out did themselves. Their customer service is outstanding! They give you many options to stay within your price range, and they walk you through every step of the way. I highly recommend these guys!', name:'Marc Fenwick', stars:5 },
-  { title:'Team are incredible', body:"Brandon and his team are incredible. The Tundra they've built for me looks and drives amazing. I'll be back for my next purchase.", name:'Jeff Robinson', stars:5 },
-  { title:'One of the best dealers', body:"Brandon will go to the ends of the earth to make sure you get the truck you need/want. One of the best dealers I've worked with!", name:'CJ Hylander', stars:5 }
+  { title:'Team are incredible', body:"Brandon and his team are incredible. The Tundra they've built for me looks and drives amazing. I'll be back for my next purchase.", name:'Jeff Robinson', stars:5 }
 ];
 
 // ── ROUTER STATE MANAGEMENT ───────────────────────────────────────────────────
@@ -1655,7 +1549,7 @@ document.getElementById('hamburgerBtn').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ── CARD CONTAINER GENERATOR MATRIX ────────────────────────────────────────────
+// ── FIXED CARD BUILDER (NO MORE OLD AUTOMATED CODES) ──────────────────────────────────
 function buildCard(v) {
   return `
   <div class="vehicle-card">
@@ -1688,7 +1582,7 @@ function buildCard(v) {
   </div>`;
 }
 
-// ── DETAIL OVERLAY MODAL SYSTEM FUNCTIONS ──────────────────────────────────────
+// ── FIXED LEAD CAPTURING OVERLAY MODAL FUNCTION ──
 function openDetailsModal(id) {
   const car = VEHICLES.find(v => v.id === id);
   if (!car) return;
@@ -1707,12 +1601,11 @@ function closeModal() {
   document.getElementById('detailModal').style.display = 'none';
 }
 
-// Close modal when clicking outside container
 document.getElementById('detailModal').addEventListener('click', (e) => {
   if (e.target.id === 'detailModal') closeModal();
 });
 
-// ── DOM DATA RENDERING ─────────────────────────────────────────────────────────
+// ── DATA RENDERING LOOPS ──
 function renderHomeFeatured() {
   const featured = VEHICLES.filter(v => v.badge).slice(0, 4);
   document.getElementById('homeFeaturedGrid').innerHTML = featured.map(buildCard).join('');
@@ -1790,7 +1683,6 @@ function renderReviews() {
   `).join('');
 }
 
-// ── UTILITY SYSTEM FORM HANDLERS ────────────────────────────────────────────────
 function interceptSubmit(e, text) {
   e.preventDefault();
   showToast(text);
