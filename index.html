@@ -108,7 +108,7 @@
   }
   .logo-text {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7 0.7rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -1549,7 +1549,7 @@ document.getElementById('hamburgerBtn').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ── FIXED CARD BUILDER (NO MORE OLD AUTOMATED CODES) ──────────────────────────────────
+// ── FIXED CARD BUILDER ──
 function buildCard(v) {
   return `
   <div class="vehicle-card">
@@ -1605,10 +1605,13 @@ document.getElementById('detailModal').addEventListener('click', (e) => {
   if (e.target.id === 'detailModal') closeModal();
 });
 
-// ── DATA RENDERING LOOPS ──
+// ── DYNAMIC INJECTORS (FORCES PURGE OF RAW HTML) ──
 function renderHomeFeatured() {
   const featured = VEHICLES.filter(v => v.badge).slice(0, 4);
-  document.getElementById('homeFeaturedGrid').innerHTML = featured.map(buildCard).join('');
+  const homeGrid = document.getElementById('homeFeaturedGrid');
+  if (homeGrid) {
+    homeGrid.innerHTML = featured.map(buildCard).join('');
+  }
 }
 
 function getFiltered() {
@@ -1645,7 +1648,11 @@ function renderInventory() {
   const grid = document.getElementById('inventoryGrid');
   const count = document.getElementById('resultsCount');
 
-  count.textContent = `Showing ${results.length} of ${VEHICLES.length} Available Vehicles`;
+  if (count) {
+    count.textContent = `Showing ${results.length} of ${VEHICLES.length} Available Vehicles`;
+  }
+
+  if (!grid) return;
 
   if (!results.length) {
     grid.innerHTML = '<div class="no-results"><i class="fas fa-search" style="display:block;font-size:2rem;color:var(--gold);margin-bottom:1rem;"></i>No vehicles match your filters</div>';
@@ -1654,33 +1661,44 @@ function renderInventory() {
   grid.innerHTML = results.map(buildCard).join('');
 }
 
-['filterYear','filterMake','filterModel','filterBody','filterPrice','filterDrive','filterColor','sortSelect']
-  .forEach(id => document.getElementById(id).addEventListener('change', renderInventory));
-
-document.getElementById('clearFilters').addEventListener('click', () => {
-  ['filterYear','filterMake','filterModel','filterBody','filterPrice','filterDrive','filterColor','sortSelect']
-    .forEach(id => { document.getElementById(id).selectedIndex = 0; });
-  renderInventory();
+// Attach listeners safely
+const filterIds = ['filterYear','filterMake','filterModel','filterBody','filterPrice','filterDrive','filterColor','sortSelect'];
+filterIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', renderInventory);
 });
+
+const clearBtn = document.getElementById('clearFilters');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    filterIds.forEach(id => { 
+      const el = document.getElementById(id);
+      if (el) el.selectedIndex = 0; 
+    });
+    renderInventory();
+  });
+}
 
 document.querySelectorAll('.filter-label').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = document.getElementById(btn.dataset.target);
     const isOpen = btn.classList.toggle('open');
-    target.style.display = isOpen ? '' : 'none';
+    if (target) target.style.display = isOpen ? '' : 'none';
   });
 });
 
 function renderReviews() {
   const col = document.getElementById('reviewsColumn');
-  col.innerHTML = REVIEWS.map(r => `
-    <div class="review-card">
-      <div class="review-title">${r.title}</div>
-      <div class="review-body">${r.body}</div>
-      <div class="stars">${'<span class="star">★</span>'.repeat(r.stars)}</div>
-      <div class="reviewer-name">${r.name}</div>
-    </div>
-  `).join('');
+  if (col) {
+    col.innerHTML = REVIEWS.map(r => `
+      <div class="review-card">
+        <div class="review-title">${r.title}</div>
+        <div class="review-body">${r.body}</div>
+        <div class="stars">${'<span class="star">★</span>'.repeat(r.stars)}</div>
+        <div class="reviewer-name">${r.name}</div>
+      </div>
+    `).join('');
+  }
 }
 
 function interceptSubmit(e, text) {
@@ -1692,36 +1710,45 @@ function interceptSubmit(e, text) {
 
 const featuresTA = document.getElementById('desiredFeatures');
 const charCount = document.getElementById('charCount');
-if (featuresTA) {
+if (featuresTA && charCount) {
   featuresTA.addEventListener('input', () => {
     charCount.textContent = `Characters left: ${1024 - featuresTA.value.length}`;
   });
 }
 
-document.getElementById('tabBuyer').addEventListener('click', () => {
-  document.getElementById('tabBuyer').classList.add('active');
-  document.getElementById('tabCoBuyer').classList.remove('active');
-  document.getElementById('buyerForm').style.display = '';
-  document.getElementById('coBuyerForm').classList.remove('active');
-});
-document.getElementById('tabCoBuyer').addEventListener('click', () => {
-  document.getElementById('tabCoBuyer').classList.add('active');
-  document.getElementById('tabBuyer').classList.remove('active');
-  document.getElementById('buyerForm').style.display = 'none';
-  document.getElementById('coBuyerForm').classList.add('active');
-});
+const tBuyer = document.getElementById('tabBuyer');
+const tCoBuyer = document.getElementById('tabCoBuyer');
+if (tBuyer && tCoBuyer) {
+  tBuyer.addEventListener('click', () => {
+    tBuyer.classList.add('active');
+    tCoBuyer.classList.remove('active');
+    document.getElementById('buyerForm').style.display = '';
+    document.getElementById('coBuyerForm').classList.remove('active');
+  });
+  tCoBuyer.addEventListener('click', () => {
+    tCoBuyer.classList.add('active');
+    tBuyer.classList.remove('active');
+    document.getElementById('buyerForm').style.display = 'none';
+    document.getElementById('coBuyerForm').classList.add('active');
+  });
+}
 
 function showToast(msg) {
   const toast = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  const toastMsg = document.getElementById('toastMsg');
+  if (toast && toastMsg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
 }
 
-// ── LIFECYCLE INITIALIZATION ──
-renderHomeFeatured();
-renderInventory();
-renderReviews();
+// ── LIFECYCLE INITIALIZATION (FORCED RUN) ──
+window.addEventListener('DOMContentLoaded', () => {
+  renderHomeFeatured();
+  renderInventory();
+  renderReviews();
+});
 </script>
 </body>
 </html>
