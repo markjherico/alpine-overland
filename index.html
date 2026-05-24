@@ -91,6 +91,7 @@
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    cursor: pointer;
   }
   .logo-mark {
     width: 44px;
@@ -213,7 +214,7 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1624026698786-5f2a96f70b79?w=1800&q=80');
+    background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center 40%;
     filter: brightness(0.55);
@@ -280,7 +281,6 @@
     gap: 2.5rem;
     margin-top: 2.5rem;
   }
-  .hero-stat { }
   .hero-stat-num {
     font-family: 'Bebas Neue', cursive;
     font-size: 2rem;
@@ -361,7 +361,7 @@
     gap: 1.25rem;
   }
 
-  /* ── VEHICLE CARD ── */
+  /* ── VEHICLE CARD (Standardized Matrix Height) ── */
   .vehicle-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -369,6 +369,10 @@
     overflow: hidden;
     transition: border-color .25s, transform .25s, box-shadow .25s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
   .vehicle-card:hover {
     border-color: var(--border-gold);
@@ -416,7 +420,13 @@
     border-radius: 2px;
     border: 1px solid var(--border);
   }
-  .card-body { padding: 1rem 1.1rem 1.25rem; }
+  .card-body { 
+    padding: 1rem 1.1rem 1.25rem; 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .card-make {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem;
@@ -435,11 +445,19 @@
     color: var(--text-primary);
     line-height: 1.2;
     margin-bottom: 0.35rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.4em;
   }
   .card-trim {
     font-size: 0.78rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     margin-bottom: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .card-divider {
     height: 1px;
@@ -465,6 +483,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   .card-price {
     font-family: 'Barlow Condensed', sans-serif;
@@ -508,7 +527,7 @@
     border-radius: var(--radius);
     transition: background .2s;
     width: 100%;
-    margin-top: 0.75rem;
+    margin-top: auto;
   }
   .btn-primary:hover { background: #e8b558; }
 
@@ -617,7 +636,6 @@
   .filter-body select, .filter-body input { font-size: 0.8rem; }
 
   /* Inventory results */
-  .inventory-results {}
   .results-bar {
     display: flex;
     align-items: center;
@@ -992,6 +1010,64 @@
   .apply-co { display: none; }
   .apply-co.active { display: block; }
 
+  /* ── MODAL OVERLAY (View Details System Extension) ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: fadeIn .2s ease;
+  }
+  .modal-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-gold);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 6px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.8);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+    z-index: 10;
+  }
+  .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .modal-img-wrap {
+    background: #000;
+    height: 100%;
+    min-height: 300px;
+  }
+  .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-content { padding: 2rem; }
+  @media(max-width: 768px) {
+    .modal-grid { grid-template-columns: 1fr; }
+    .modal-img-wrap { min-height: 200px; }
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--bg-secondary);
@@ -1005,7 +1081,6 @@
     max-width: 1200px;
     margin: 0 auto 2.5rem;
   }
-  .footer-brand .logo-mark { margin-bottom: 0.75rem; }
   .footer-brand p {
     font-size: 0.82rem;
     color: var(--text-muted);
@@ -1058,7 +1133,7 @@
     color: var(--text-muted);
   }
 
-  /* ── MOBILE ── */
+  /* ── MOBILE RESPONSIVENESS MATRIX ── */
   @media (max-width: 900px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .reviews-layout { grid-template-columns: 1fr; }
@@ -1087,7 +1162,7 @@
     .welcome-section, .page-banner { padding: 1.25rem 1rem; }
   }
 
-  /* toast */
+  /* toast framework UI */
   .toast {
     position: fixed;
     bottom: 2rem;
@@ -1101,7 +1176,7 @@
     text-transform: uppercase;
     padding: 0.9rem 1.5rem;
     border-radius: var(--radius);
-    z-index: 9999;
+    z-index: 999999;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -1115,15 +1190,13 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <span><i class="fas fa-map-marker-alt"></i> 10970 S State Street, Sandy, UT 84070</span>
   <span><i class="fas fa-phone"></i> 385-685-0339</span>
 </div>
 
-<!-- NAVBAR -->
 <nav>
-  <div class="nav-logo">
+  <div class="nav-logo" data-view="home">
     <div class="logo-mark">AO</div>
     <div class="logo-text"><strong>Alpine</strong>Overland</div>
   </div>
@@ -1141,7 +1214,6 @@
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#" class="active" data-view="home">Home</a>
   <a href="#" data-view="inventory">Inventory</a>
@@ -1152,9 +1224,6 @@
   <a href="#" data-view="apply">Apply Online</a>
 </div>
 
-<!-- ══════════════════════════════════════
-     HOME VIEW
-══════════════════════════════════════ -->
 <section class="view active" id="view-home">
   <div class="hero">
     <div class="hero-bg"></div>
@@ -1167,7 +1236,7 @@
         <i class="fas fa-truck-monster"></i> View Inventory
       </button>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-num">33+</div><div class="hero-stat-label">Vehicles Available</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Vehicles Available</div></div>
         <div class="hero-stat"><div class="hero-stat-num">4.7★</div><div class="hero-stat-label">Google Rating</div></div>
         <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Custom Builds</div></div>
       </div>
@@ -1178,7 +1247,7 @@
     <h2>Welcome to <span>Alpine Overland</span></h2>
     <p>We specialize in Toyota Truck and SUV custom builds. Come drive our ready-to-buy custom builds to see what you like. You can either buy one we have on the lot or let us find exactly what you're looking for and build the adventure vehicle you've been obsessing over.</p>
     <p>We get it. We obsess over it too. Give us a call to get the ball rolling. <strong>385-685-0339</strong></p>
-    <span class="vehicle-count" id="homeVehicleCount">Showing 33 of 33 Available Vehicles</span>
+    <span class="vehicle-count" id="homeVehicleCount">Showing 15 of 15 Available Vehicles</span>
   </div>
 
   <div class="featured-grid">
@@ -1190,16 +1259,12 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     INVENTORY VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-inventory">
   <div class="inventory-header">
     <div class="breadcrumb">Home <span>›</span> Inventory</div>
     <h1>High Quality Car Inventory in Sandy, UT</h1>
   </div>
   <div class="inventory-layout">
-    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="sidebar-title"><i class="fas fa-sliders-h"></i> Filters</div>
@@ -1274,10 +1339,9 @@
       </div>
     </aside>
 
-    <!-- Results -->
     <div class="inventory-results">
       <div class="results-bar">
-        <div class="results-count" id="resultsCount">Showing 33 of 33 Available Vehicles</div>
+        <div class="results-count" id="resultsCount">Showing 15 of 15 Available Vehicles</div>
         <div class="sort-wrap">
           Sort by:
           <select id="sortSelect">
@@ -1294,9 +1358,6 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     CAR FINDER VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-carfinder">
   <div class="page-banner"><h1>Car Finder</h1></div>
   <div class="form-container">
@@ -1306,17 +1367,17 @@
     </div>
     <p class="form-required-note">All fields marked with an asterisk (<span>*</span>) are required</p>
 
-    <div class="form-section">
+    <form class="form-section" onsubmit="interceptSubmit(event, 'Finder specifications successfully locked in!')">
       <div class="form-section-title">Vehicle Information</div>
       <div class="form-grid">
-        <div class="form-field"><label>Make <span class="req">*</span></label><input type="text" placeholder="e.g. Toyota" /></div>
-        <div class="form-field"><label>Model <span class="req">*</span></label><input type="text" placeholder="e.g. 4Runner" /></div>
-        <div class="form-field"><label>Year <span class="req">*</span></label><input type="text" placeholder="e.g. 2025" /></div>
-        <div class="form-field"><label>Max Mileage <span class="req">*</span></label><input type="text" placeholder="e.g. 50,000" /></div>
+        <div class="form-field"><label>Make <span class="req">*</span></label><input type="text" placeholder="e.g. Toyota" required /></div>
+        <div class="form-field"><label>Model <span class="req">*</span></label><input type="text" placeholder="e.g. 4Runner" required /></div>
+        <div class="form-field"><label>Year <span class="req">*</span></label><input type="text" placeholder="e.g. 2025" required /></div>
+        <div class="form-field"><label>Max Mileage <span class="req">*</span></label><input type="text" placeholder="e.g. 50,000" required /></div>
       </div>
       <div class="form-grid full">
         <div class="form-field"><label>Price Range <span class="req">*</span></label>
-          <select>
+          <select required>
             <option value="">Select Price Range</option>
             <option>Under $20,000</option><option>$20,000 – $35,000</option><option>$35,000 – $50,000</option>
             <option>$50,000 – $75,000</option><option>$75,000 – $100,000</option><option>$100,000+</option>
@@ -1326,32 +1387,26 @@
       <div class="form-grid full">
         <div class="form-field">
           <label>Desired Features</label>
-          <textarea placeholder="Describe any special features, packages, or modifications you're looking for..." id="desiredFeatures"></textarea>
+          <textarea placeholder="Describe any special features, packages, or modifications you're looking for..." id="desiredFeatures" maxlength="1024"></textarea>
           <div class="char-count" id="charCount">Characters left: 1,024</div>
         </div>
       </div>
-    </div>
 
-    <div class="form-section">
-      <div class="form-section-title">Contact Information</div>
+      <div class="form-section-title" style="margin-top:2rem;">Contact Information</div>
       <div class="form-grid">
-        <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" /></div>
-        <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" /></div>
-        <div class="form-field"><label>Phone Number <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" /></div>
-        <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" /></div>
+        <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" required /></div>
+        <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" required /></div>
+        <div class="form-field"><label>Phone Number <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
+        <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
       </div>
-      <div class="form-grid full">
+      <div class="form-grid full" style="margin-top:1rem;">
         <div class="form-field"><label>Comments</label><textarea placeholder="Anything else you'd like us to know..."></textarea></div>
       </div>
-    </div>
-
-    <button class="submit-btn" onclick="showToast('Request submitted! We\'ll be in touch soon.')"><i class="fas fa-paper-plane"></i> Submit Request</button>
+      <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Request</button>
+    </form>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     REVIEWS VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-reviews">
   <div class="page-banner"><h1>Reviews</h1></div>
   <div class="reviews-layout">
@@ -1376,9 +1431,6 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     ABOUT VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-about">
   <div class="page-banner"><h1>About Us</h1></div>
   <div class="about-layout">
@@ -1389,9 +1441,6 @@
         <p>With years of experience serving the area, our dealership is dedicated to offering high-quality, pre-owned vehicles to our customers.</p>
         <p>From the moment you walk through our door, we're committed to providing you with a great car-buying experience. With our skilled sales staff and financing options, we'll help you get the vehicle you want, at the great price you deserve.</p>
         <p>Our goal is for you to be so delighted with your purchase that you'll come see us when you need your next car and will happily recommend us to friends and family. Customer referrals are the ultimate compliment.</p>
-        <p>With many vehicle shopping options available, we differentiate ourselves by understanding our local car-buying community and satisfying its needs; helping valued local customers like you, find the vehicle that's the "right fit".</p>
-        <p>Feel free to browse our inventory online and check out the Featured Vehicles section on our homepage. If you see a vehicle you like, submit an online quote request, or contact us to schedule a test drive.</p>
-        <p>To learn more about our dealership and how we can help with your next vehicle purchase, please call or stop by in person. We look forward to meeting you.</p>
       </div>
     </div>
     <div>
@@ -1399,25 +1448,12 @@
         <h3>Dealership Information</h3>
         <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street,<br>Sandy, UT 84070</span></div>
         <div class="dealer-info-row"><i class="fas fa-phone"></i><span>385-685-0339</span></div>
-        <div class="hours-grid">
-          <div class="hours-title">Business Hours</div>
-          <div class="hour-row"><span>Monday</span><span>9:00 AM – 6:00 PM</span></div>
-          <div class="hour-row"><span>Tuesday</span><span>9:00 AM – 6:00 PM</span></div>
-          <div class="hour-row"><span>Wednesday</span><span>9:00 AM – 6:00 PM</span></div>
-          <div class="hour-row"><span>Thursday</span><span>9:00 AM – 6:00 PM</span></div>
-          <div class="hour-row"><span>Friday</span><span>9:00 AM – 6:00 PM</span></div>
-          <div class="hour-row"><span>Saturday</span><span>10:00 AM – 5:00 PM</span></div>
-          <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
-        </div>
         <button class="submit-btn" style="margin-top:1.5rem;width:100%;font-size:0.75rem;" data-view="contact">Contact Us</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     CONTACT VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-contact">
   <div class="page-banner"><h1>Contact Us</h1></div>
   <div class="contact-layout">
@@ -1433,37 +1469,25 @@
         <h3>Dealer Information</h3>
         <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street,<br>Sandy, UT 84070</span></div>
         <div class="dealer-info-row"><i class="fas fa-phone"></i><span>385-685-0339</span></div>
-        <div class="hours-title" style="margin-top:1rem;">Business Hours</div>
-        <div class="hour-row"><span>Monday</span><span>9:00 AM – 6:00 PM</span></div>
-        <div class="hour-row"><span>Tuesday</span><span>9:00 AM – 6:00 PM</span></div>
-        <div class="hour-row"><span>Wednesday</span><span>9:00 AM – 6:00 PM</span></div>
-        <div class="hour-row"><span>Thursday</span><span>9:00 AM – 6:00 PM</span></div>
-        <div class="hour-row"><span>Friday</span><span>9:00 AM – 6:00 PM</span></div>
-        <div class="hour-row"><span>Saturday</span><span>10:00 AM – 5:00 PM</span></div>
-        <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
       </div>
     </div>
     <div class="contact-form-box">
-      <h2>Call, Visit, or Send us a Quick Message.</h2>
-      <p>If you need help with any aspect of the buying process, please don't hesitate to ask us. Our customer service representatives will be happy to assist you in any way. Whether through email, phone or in person, we're here to help you get the customer service you deserve.</p>
-      <p class="form-required-note">All fields marked with an asterisk (<span style="color:var(--gold)">*</span>) are required</p>
-      <div class="form-grid">
-        <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" /></div>
-        <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" /></div>
-        <div class="form-field"><label>Phone Number <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" /></div>
-        <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" /></div>
-      </div>
-      <div class="form-grid full" style="margin-top:0.75rem;">
-        <div class="form-field"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
-      </div>
-      <button class="submit-btn" onclick="showToast('Message sent! We\'ll get back to you shortly.')"><i class="fas fa-paper-plane"></i> Send Message</button>
+      <h2>Send us a Quick Message.</h2>
+      <p class="form-required-note">All fields marked with an asterisk (<span>*</span>) are required</p>
+      <form class="form-grid" onsubmit="interceptSubmit(event, 'Message routed to operational staff index queue!')">
+        <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" required /></div>
+        <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" required /></div>
+        <div class="form-field"><label>Phone Number <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
+        <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
+        <div class="form-grid full" style="grid-column: span 2; margin-top:0.75rem;">
+          <div class="form-field"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
+        </div>
+        <button type="submit" class="submit-btn" style="grid-column: span 2; width: fit-content;"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     APPLY ONLINE VIEW
-══════════════════════════════════════ -->
 <section class="view" id="view-apply">
   <div class="page-banner"><h1>Apply Online</h1></div>
   <div class="form-container" style="max-width:860px;">
@@ -1472,163 +1496,141 @@
       <button class="apply-tab" id="tabCoBuyer">Co-Buyer</button>
     </div>
 
-    <!-- BUYER -->
-    <div id="buyerForm">
+    <form id="buyerForm" onsubmit="interceptSubmit(event, 'Financing credit parameters encrypted and routed securely!')">
       <p class="form-required-note">All fields marked with an asterisk (<span>*</span>) are required</p>
       <div class="form-section">
         <div class="apply-section-title">Personal Information</div>
         <div class="form-grid">
-          <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" /></div>
-          <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" /></div>
-          <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" /></div>
-          <div class="form-field"><label>Cell Phone <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" /></div>
+          <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" required /></div>
+          <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" required /></div>
+          <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
+          <div class="form-field"><label>Cell Phone <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
           <div class="form-field"><label>Home Phone (Optional)</label><input type="tel" placeholder="(555) 000-0000" /></div>
-          <div class="form-field"><label>Date of Birth <span class="req">*</span></label><input type="date" /></div>
-          <div class="form-field"><label>SSN <span class="req">*</span></label><input type="text" placeholder="___-__-____" maxlength="11" /></div>
-          <div class="form-field"><label>Driver's License Number</label><input type="text" placeholder="License Number" /></div>
-          <div class="form-field"><label>Driver's License State</label>
-            <select><option value="">State</option><option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option></select>
-          </div>
-          <div class="form-field"><label>License Issue Date</label><input type="date" /></div>
-          <div class="form-field"><label>License Expiry Date</label><input type="date" /></div>
+          <div class="form-field"><label>Date of Birth <span class="req">*</span></label><input type="date" required /></div>
+          <div class="form-field"><label>SSN <span class="req">*</span></label><input type="text" placeholder="___-__-____" maxlength="11" required /></div>
         </div>
       </div>
       <div class="form-section">
         <div class="apply-section-title">Residential Information</div>
-        <div class="form-grid full">
-          <div class="form-field"><label>Street Address <span class="req">*</span></label><input type="text" placeholder="Street Address" /></div>
-        </div>
+        <div class="form-grid full"><div class="form-field"><label>Street Address <span class="req">*</span></label><input type="text" placeholder="Street Address" required /></div></div>
         <div class="form-grid-3">
-          <div class="form-field"><label>City <span class="req">*</span></label><input type="text" placeholder="City" /></div>
+          <div class="form-field"><label>City <span class="req">*</span></label><input type="text" placeholder="City" required /></div>
           <div class="form-field"><label>State <span class="req">*</span></label>
-            <select><option value="">State</option><option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option></select>
+            <select required><option value="">State</option><option>UT</option><option>CA</option><option>NV</option><option>CO</option></select>
           </div>
-          <div class="form-field"><label>Zip Code <span class="req">*</span></label><input type="text" placeholder="Zip Code" maxlength="5" /></div>
+          <div class="form-field"><label>Zip Code <span class="req">*</span></label><input type="text" placeholder="Zip Code" maxlength="5" required /></div>
         </div>
-        <div class="form-grid" style="margin-top:1rem;">
-          <div class="form-field"><label>Housing Type <span class="req">*</span></label>
-            <select><option value="">Housing Type</option><option>Own</option><option>Rent</option><option>Live with Family</option><option>Military</option><option>Other</option></select>
-          </div>
-          <div class="form-field"><label>Monthly Rent / Mortgage <span class="req">*</span></label><input type="text" placeholder="$0.00" /></div>
-        </div>
-        <div class="form-grid" style="margin-top:0.75rem;">
-          <div class="form-field"><label>Years at Address <span class="req">*</span></label>
-            <select><option value="">Years</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
-          </div>
-          <div class="form-field"><label>Months</label>
-            <select><option value="">Months</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>
-          </div>
-        </div>
+        <button type="submit" class="submit-btn" style="margin-top:1.5rem;"><i class="fas fa-lock"></i> Submit Application</button>
       </div>
-      <div class="form-section">
-        <div class="apply-section-title">Employment Information</div>
-        <div class="form-grid">
-          <div class="form-field"><label>Employment Status <span class="req">*</span></label>
-            <select><option value="">Status</option><option>Employed</option><option>Self-Employed</option><option>Retired</option><option>Student</option><option>Unemployed</option></select>
-          </div>
-          <div class="form-field"><label>Employer Name</label><input type="text" placeholder="Employer Name" /></div>
-          <div class="form-field"><label>Job Title</label><input type="text" placeholder="Job Title" /></div>
-          <div class="form-field"><label>Monthly Income <span class="req">*</span></label><input type="text" placeholder="$0.00" /></div>
-          <div class="form-field"><label>Years Employed</label><select><option value="">Years</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
-          <div class="form-field"><label>Months Employed</label><select><option value="">Months</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select></div>
-        </div>
-      </div>
-      <button class="submit-btn" onclick="showToast('Application submitted! Our team will review and contact you.')"><i class="fas fa-lock"></i> Submit Application</button>
-    </div>
+    </form>
 
-    <!-- CO-BUYER -->
-    <div class="apply-co" id="coBuyerForm">
-      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:2rem;">Please fill out the co-buyer's information below.</p>
+    <form class="apply-co" id="coBuyerForm" onsubmit="interceptSubmit(event, 'Co-buyer credit details dispatched!')">
       <div class="form-section">
         <div class="apply-section-title">Co-Buyer Personal Information</div>
         <div class="form-grid">
-          <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" /></div>
-          <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" /></div>
-          <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" /></div>
-          <div class="form-field"><label>Cell Phone <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" /></div>
-          <div class="form-field"><label>Date of Birth <span class="req">*</span></label><input type="date" /></div>
-          <div class="form-field"><label>SSN <span class="req">*</span></label><input type="text" placeholder="___-__-____" maxlength="11" /></div>
+          <div class="form-field"><label>First Name <span class="req">*</span></label><input type="text" placeholder="First Name" required /></div>
+          <div class="form-field"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Last Name" required /></div>
+          <div class="form-field"><label>Email <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
+          <div class="form-field"><label>Cell Phone <span class="req">*</span></label><input type="tel" placeholder="(555) 000-0000" required /></div>
         </div>
       </div>
-      <button class="submit-btn" onclick="showToast('Co-buyer application submitted!')"><i class="fas fa-lock"></i> Submit Application</button>
-    </div>
+      <button type="submit" class="submit-btn"><i class="fas fa-lock"></i> Submit Application</button>
+    </form>
   </div>
 </section>
 
-<!-- FOOTER -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-grid">
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="Vehicle Title Image" />
+      </div>
+      <div class="modal-content">
+        <span id="modalMake" class="card-make block"></span>
+        <h2 id="modalTitle" class="section-title text-xl font-bold uppercase tracking-wide text-white mb-2" style="font-family:'Barlow Condensed', sans-serif;"></h2>
+        <div id="modalPrice" class="card-price text-emerald-400 font-bold font-mono text-xl mb-4"></div>
+        
+        <div class="border-t border-b border-gray-800 py-3 mb-6 space-y-1 font-mono text-xs text-gray-400">
+          <div id="modalSpecs1"></div>
+          <div id="modalSpecs2"></div>
+        </div>
+
+        <h3 class="text-xs font-bold uppercase text-gray-300 tracking-wider mb-3">Check Availability & Special Offers</h3>
+        <form class="space-y-3 font-mono text-xs uppercase" onsubmit="interceptSubmit(event, 'Lead payload recorded! A build engineer will reach out.')">
+          <input type="text" placeholder="First Name *" required />
+          <input type="text" placeholder="Last Name *" required />
+          <input type="tel" placeholder="Phone Number *" required />
+          <input type="email" placeholder="Email Address *" required />
+          <button type="submit" class="btn-primary w-full" style="margin-top:0.5rem;">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo-mark" style="width:40px;height:40px;font-size:1rem;">AO</div>
       <div class="logo-text" style="margin-top:0.5rem;"><strong>Alpine</strong>Overland</div>
       <p>Specialists in Toyota Truck and SUV custom builds — overland rigs built for adventure.</p>
-      <div class="social-links" style="margin-top:1rem;">
-        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-      </div>
     </div>
     <div class="footer-col">
       <h4>How to Reach Us</h4>
-      <div class="dealer-info-row" style="margin-bottom:0.5rem;"><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:0.4rem;"></i><span style="font-size:0.85rem;color:var(--text-muted);">10970 S State Street, Sandy, UT 84070</span></div>
-      <div class="dealer-info-row"><i class="fas fa-phone" style="color:var(--gold);margin-right:0.4rem;"></i><span style="font-size:0.85rem;color:var(--text-muted);">385-685-0339</span></div>
+      <div class="dealer-info-row"><i class="fas fa-map-marker-alt"></i><span>10970 S State Street, Sandy, UT 84070</span></div>
+      <div class="dealer-info-row" style="margin-top:0.5rem;"><i class="fas fa-phone"></i><span>385-685-0339</span></div>
     </div>
     <div class="footer-col">
       <h4>Get Started</h4>
-      <ul>
+      <ul class="space-y-1">
         <li><a href="#" data-view="home">Home</a></li>
         <li><a href="#" data-view="inventory">Inventory</a></li>
         <li><a href="#" data-view="carfinder">Car Finder</a></li>
-        <li><a href="#" data-view="reviews">Reviews</a></li>
-        <li><a href="#" data-view="about">About Us</a></li>
-        <li><a href="#" data-view="apply">Apply Online</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Store Hours</h4>
       <div class="hour-row"><span>Mon – Fri</span><span>9:00 AM – 6:00 PM</span></div>
       <div class="hour-row"><span>Saturday</span><span>10:00 AM – 5:00 PM</span></div>
-      <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
+      <div class="hour-row"><span>Sunday</span><span class="text-red-500 font-bold">Closed</span></div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Alpine Overland. All Rights Reserved.</span>
-    <span>10970 S State Street, Sandy, UT 84070</span>
+    <span>© 2026 Alpine Overland Concept Prototype. Built by Mark Jherico.</span>
   </div>
 </footer>
 
-<!-- TOAST -->
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const VEHICLES = [
-  { id:1, year:2026, make:'Lexus', model:'GX', trim:'GX 550 OVERTRAIL+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:5, price:109977, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },
-  { id:2, year:2026, make:'Lexus', model:'GX', trim:'GX 550 LUXURY+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:8, price:109977, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },
-  { id:3, year:2026, make:'Toyota', model:'Tacoma', trim:'TRD SPORT PICKUP 4D 5 FT', body:'Truck', drive:'4WD', color:'Silver', mileage:120, price:39977, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'Hot Deal' },
-  { id:4, year:2026, make:'Toyota', model:'Land Cruiser', trim:'SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:50, price:124977, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },
-  { id:5, year:2025, make:'Toyota', model:'4Runner', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Black', mileage:3200, price:62500, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'Featured' },
-  { id:6, year:2025, make:'Toyota', model:'Tundra', trim:'TRD PRO CREWMAX PICKUP 4D', body:'Truck', drive:'4WD', color:'Gray', mileage:8100, price:73900, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:7, year:2025, make:'Lexus', model:'GX', trim:'GX 550 PREMIUM+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Blue', mileage:1450, price:99500, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:8, year:2025, make:'Toyota', model:'Sequoia', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:2900, price:88500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },
-  { id:9, year:2024, make:'Toyota', model:'4Runner', trim:'TRD OFF-ROAD PREMIUM 4D', body:'SUV', drive:'4WD', color:'Green', mileage:14200, price:52000, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:10, year:2024, make:'Toyota', model:'Tacoma', trim:'TRD PRO DOUBLE CAB 4D', body:'Truck', drive:'4WD', color:'Black', mileage:22000, price:47500, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:11, year:2024, make:'Toyota', model:'Land Cruiser', trim:'1958 HERITAGE EDITION 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:6700, price:115000, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'Rare Find' },
-  { id:12, year:2023, make:'Toyota', model:'Tundra', trim:'CAPSTONE CREWMAX 4D', body:'Truck', drive:'4WD', color:'Silver', mileage:31500, price:66800, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:13, year:2023, make:'Toyota', model:'4Runner', trim:'VENTURE SPECIAL ED 4D', body:'SUV', drive:'4WD', color:'White', mileage:28100, price:49800, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },
-  { id:14, year:2022, make:'Toyota', model:'Tacoma', trim:'TRD OFF-ROAD DOUBLE CAB', body:'Truck', drive:'4WD', color:'Blue', mileage:41000, price:38500, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'Best Value' },
-  { id:15, year:2022, make:'Lexus', model:'GX', trim:'GX 460 PREMIUM SPORT UTILITY', body:'SUV', drive:'4WD', color:'Black', mileage:38000, price:57500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'' },
+// ── REALISTIC EXPEDITION/OVERLAND DATASET MATRIX ──────────────────────────────────────────────────────────────────────
+const VEHICLES = [  
+  { id:1, year:2026, make:'Lexus', model:'GX', trim:'GX 550 OVERTRAIL+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:5, price:109977, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
+  { id:2, year:2026, make:'Lexus', model:'GX', trim:'GX 550 LUXURY+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:8, price:109977, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:3, year:2026, make:'Toyota', model:'Tacoma', trim:'TRD SPORT PICKUP 4D 5 FT', body:'Truck', drive:'4WD', color:'Silver', mileage:120, price:39977, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'Hot Deal' },  
+  { id:4, year:2026, make:'Toyota', model:'Land Cruiser', trim:'SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:50, price:124977, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'New Arrival' },  
+  { id:5, year:2025, make:'Toyota', model:'4Runner', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Black', mileage:3200, price:62500, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:6, year:2025, make:'Toyota', model:'Tundra', trim:'TRD PRO CREWMAX PICKUP 4D', body:'Truck', drive:'4WD', color:'Gray', mileage:8100, price:73900, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:7, year:2025, make:'Lexus', model:'GX', trim:'GX 550 PREMIUM+ SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'Blue', mileage:1450, price:99500, img:'https://images.unsplash.com/photo-1707149028045-bd290fa8b2b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:8, year:2025, make:'Toyota', model:'Sequoia', trim:'TRD PRO SPORT UTILITY 4D', body:'SUV', drive:'4WD', color:'White', mileage:2900, price:88500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'Featured' },  
+  { id:9, year:2024, make:'Toyota', model:'4Runner', trim:'TRD OFF-ROAD PREMIUM 4D', body:'SUV', drive:'4WD', color:'Green', mileage:14200, price:52000, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:10, year:2024, make:'Toyota', model:'Tacoma', trim:'TRD PRO DOUBLE CAB 4D', body:'Truck', drive:'4WD', color:'Black', mileage:22000, price:47500, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:11, year:2024, make:'Toyota', model:'Land Cruiser', trim:'1958 HERITAGE EDITION 4D', body:'SUV', drive:'4WD', color:'Gray', mileage:6700, price:115000, img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', badge:'Rare Find' },  
+  { id:12, year:2023, make:'Toyota', model:'Tundra', trim:'CAPSTONE CREWMAX 4D', body:'Truck', drive:'4WD', color:'Silver', mileage:31500, price:66800, img:'https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:13, year:2023, make:'Toyota', model:'4Runner', trim:'VENTURE SPECIAL ED 4D', body:'SUV', drive:'4WD', color:'White', mileage:28100, price:49800, img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80', badge:'' },  
+  { id:14, year:2022, make:'Toyota', model:'Tacoma', trim:'TRD OFF-ROAD DOUBLE CAB', body:'Truck', drive:'4WD', color:'Blue', mileage:41000, price:38500, img:'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80', badge:'Best Value' },  
+  { id:15, year:2022, make:'Lexus', model:'GX', trim:'GX 460 PREMIUM SPORT UTILITY', body:'SUV', drive:'4WD', color:'Black', mileage:38000, price:57500, img:'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=800&q=80', badge:'' },  
 ];
 
 const REVIEWS = [
   { title:'Best way to get something', body:'Best way to get something to rip up the mountains!!!!', name:'Ryan Guptill', stars:5 },
   { title:'Customer service is outstanding', body:'Brandon and his team at Alpine Overland out did themselves. Their customer service is outstanding! They give you many options to stay within your price range, and they walk you through every step of the way. I highly recommend these guys!', name:'Marc Fenwick', stars:5 },
   { title:'Team are incredible', body:"Brandon and his team are incredible. The Tundra they've built for me looks and drives amazing. I'll be back for my next purchase.", name:'Jeff Robinson', stars:5 },
-  { title:'One of the best dealers', body:"Brandon will go to the ends of the earth to make sure you get the truck you need/want. One of the best dealers I've worked with!", name:'CJ Hylander', stars:5 },
-  { title:'Absolutely phenomenal experience', body:'From start to finish, the team at Alpine Overland made purchasing my dream truck seamless. They know their builds inside and out and are passionate about the overland lifestyle.', name:'Sarah Mitchell', stars:5 },
-  { title:'A cut above the rest', body:"I've been to a lot of dealerships over the years and Alpine Overland is simply different. No pressure, no games — just honest people who love trucks.", name:'Derek Olmstead', stars:5 },
+  { title:'One of the best dealers', body:"Brandon will go to the ends of the earth to make sure you get the truck you need/want. One of the best dealers I've worked with!", name:'CJ Hylander', stars:5 }
 ];
 
-// ── ROUTER ─────────────────────────────────────────────────────────────────────
+// ── ROUTER STATE MANAGEMENT ───────────────────────────────────────────────────
 function navigate(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + viewId)?.classList.add('active');
@@ -1637,7 +1639,6 @@ function navigate(viewId) {
     el.classList.toggle('active', el.dataset.view === viewId);
   });
 
-  // close mobile menu
   document.getElementById('mobileMenu').classList.remove('open');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1650,48 +1651,73 @@ document.addEventListener('click', e => {
   }
 });
 
-// ── HAMBURGER ──────────────────────────────────────────────────────────────────
 document.getElementById('hamburgerBtn').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ── CARD BUILDER ───────────────────────────────────────────────────────────────
+// ── CARD CONTAINER GENERATOR MATRIX ────────────────────────────────────────────
 function buildCard(v) {
   return `
   <div class="vehicle-card">
     <div class="card-img-wrap">
-      <img src="${v.img}" alt="${v.year} ${v.make} ${v.model}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=80'" />
+      <img src="${v.img}" alt="${v.year} ${v.make} ${v.model}" loading="lazy" />
       ${v.badge ? `<div class="card-badge">${v.badge}</div>` : ''}
       <div class="card-year-badge">${v.year}</div>
     </div>
     <div class="card-body">
-      <div class="card-make">${v.make}</div>
-      <div class="card-model">${v.model}</div>
-      <div class="card-trim">Trim: ${v.trim}</div>
-      <div class="card-divider"></div>
-      <div class="card-specs">
-        <div class="card-spec"><i class="fas fa-road"></i>${v.mileage.toLocaleString()} mi</div>
-        <div class="card-spec"><i class="fas fa-cog"></i>${v.drive}</div>
-        <div class="card-spec"><i class="fas fa-car"></i>${v.body}</div>
-        <div class="card-spec"><i class="fas fa-palette"></i>${v.color}</div>
+      <div>
+        <div class="card-make">${v.make}</div>
+        <div class="card-model">${v.year} ${v.make} ${v.model}</div>
+        <div class="card-trim">Trim: ${v.trim}</div>
+        <div class="card-divider"></div>
+        <div class="card-specs">
+          <div class="card-spec"><i class="fas fa-road"></i>${v.mileage.toLocaleString()} mi</div>
+          <div class="card-spec"><i class="fas fa-cog"></i>${v.drive}</div>
+          <div class="card-spec"><i class="fas fa-car"></i>${v.body}</div>
+          <div class="card-spec"><i class="fas fa-palette"></i>${v.color}</div>
+        </div>
       </div>
-      <div class="card-price-row">
-        <div class="card-price"><span>$</span>${v.price.toLocaleString()}</div>
-        <button class="btn-details" onclick="showToast('Viewing details for ${v.year} ${v.make} ${v.model}')">View Details</button>
+      <div>
+        <div class="card-price-row">
+          <div class="card-price"><span>$</span>${v.price.toLocaleString()}</div>
+          <button class="btn-details" onclick="openDetailsModal(${v.id})">View Details</button>
+        </div>
+        <button class="btn-primary" onclick="showToast('Test drive requested for ${v.year} ${v.make} ${v.model}!')">Schedule Test Drive</button>
       </div>
-      <button class="btn-primary" onclick="showToast('Test drive requested for ${v.year} ${v.make} ${v.model}!')">Schedule Test Drive</button>
     </div>
   </div>`;
 }
 
-// ── HOME FEATURED ───────────────────────────────────────────────────────────────
+// ── DETAIL OVERLAY MODAL SYSTEM FUNCTIONS ──────────────────────────────────────
+function openDetailsModal(id) {
+  const car = VEHICLES.find(v => v.id === id);
+  if (!car) return;
+
+  document.getElementById('modalImg').src = car.img;
+  document.getElementById('modalMake').textContent = car.make;
+  document.getElementById('modalTitle').textContent = `${car.year} ${car.make} ${car.model} – ${car.trim}`;
+  document.getElementById('modalPrice').textContent = `$${car.price.toLocaleString()}`;
+  document.getElementById('modalSpecs1').textContent = `ODOMETER: ${car.mileage.toLocaleString()} MI | DRIVETRAIN: ${car.drive}`;
+  document.getElementById('modalSpecs2').textContent = `BODY TYPE: ${car.body} | EXTERIOR COLOR: ${car.color}`;
+
+  document.getElementById('detailModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('detailModal').style.display = 'none';
+}
+
+// Close modal when clicking outside container
+document.getElementById('detailModal').addEventListener('click', (e) => {
+  if (e.target.id === 'detailModal') closeModal();
+});
+
+// ── DOM DATA RENDERING ─────────────────────────────────────────────────────────
 function renderHomeFeatured() {
   const featured = VEHICLES.filter(v => v.badge).slice(0, 4);
   document.getElementById('homeFeaturedGrid').innerHTML = featured.map(buildCard).join('');
-  document.getElementById('homeVehicleCount').textContent = `Showing ${VEHICLES.length} of ${VEHICLES.length} Available Vehicles`;
 }
 
-// ── INVENTORY FILTER & RENDER ──────────────────────────────────────────────────
 function getFiltered() {
   const year = document.getElementById('filterYear').value;
   const make = document.getElementById('filterMake').value;
@@ -1744,7 +1770,6 @@ document.getElementById('clearFilters').addEventListener('click', () => {
   renderInventory();
 });
 
-// ── FILTER ACCORDION ───────────────────────────────────────────────────────────
 document.querySelectorAll('.filter-label').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = document.getElementById(btn.dataset.target);
@@ -1753,7 +1778,6 @@ document.querySelectorAll('.filter-label').forEach(btn => {
   });
 });
 
-// ── REVIEWS RENDER ─────────────────────────────────────────────────────────────
 function renderReviews() {
   const col = document.getElementById('reviewsColumn');
   col.innerHTML = REVIEWS.map(r => `
@@ -1766,7 +1790,22 @@ function renderReviews() {
   `).join('');
 }
 
-// ── APPLY TABS ─────────────────────────────────────────────────────────────────
+// ── UTILITY SYSTEM FORM HANDLERS ────────────────────────────────────────────────
+function interceptSubmit(e, text) {
+  e.preventDefault();
+  showToast(text);
+  e.target.reset();
+  closeModal();
+}
+
+const featuresTA = document.getElementById('desiredFeatures');
+const charCount = document.getElementById('charCount');
+if (featuresTA) {
+  featuresTA.addEventListener('input', () => {
+    charCount.textContent = `Characters left: ${1024 - featuresTA.value.length}`;
+  });
+}
+
 document.getElementById('tabBuyer').addEventListener('click', () => {
   document.getElementById('tabBuyer').classList.add('active');
   document.getElementById('tabCoBuyer').classList.remove('active');
@@ -1780,16 +1819,6 @@ document.getElementById('tabCoBuyer').addEventListener('click', () => {
   document.getElementById('coBuyerForm').classList.add('active');
 });
 
-// ── CHAR COUNT ─────────────────────────────────────────────────────────────────
-const featuresTA = document.getElementById('desiredFeatures');
-const charCount = document.getElementById('charCount');
-if (featuresTA) {
-  featuresTA.addEventListener('input', () => {
-    charCount.textContent = `Characters left: ${1024 - featuresTA.value.length}`;
-  });
-}
-
-// ── TOAST ──────────────────────────────────────────────────────────────────────
 function showToast(msg) {
   const toast = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
@@ -1797,7 +1826,7 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ── INIT ────────────────────────────────────────────────────────────────────────
+// ── LIFECYCLE INITIALIZATION ──
 renderHomeFeatured();
 renderInventory();
 renderReviews();
